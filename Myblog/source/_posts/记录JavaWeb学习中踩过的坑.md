@@ -32,3 +32,13 @@ categories:
 * c3p0的配置文件要放直接在src目录下，不能和jdbcUtils类一起放在utils包中，不然会找不到配置文件
 
  ![文件目录](记录JavaWeb学习中踩过的坑/c3p0xml.png)
+
+## 将.sql文件导入数据库时报错"Unknown collation: 'utf8mb4_unicode_ci"
+
+错误原因：
+* 生成数据库的版本高于要导入的数据库版本，旧版本中没有"utfmb4"和`utf8mb4_0900_ai_ci`这两种字符集
+
+解决办法：
+1. 将生成的.sql文件中的**每一行**里的`utf8mb4_0900_ai_ci`替换为`utf8_general_ci`,`utf8mb4`替换为`utf8`
+
+![mysql解决办法](mysql.png)
